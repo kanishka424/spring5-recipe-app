@@ -1,6 +1,7 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -8,8 +9,6 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String description;
     private Integer prepTime;
     private Integer cookTime;
@@ -17,20 +16,14 @@ public class Recipe {
     private String url;
     private String direction;
 
+
     @Lob
     private Byte[] image;
     @OneToOne(cascade= CascadeType.ALL)
     private Notes notes;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @OneToMany(cascade= CascadeType.ALL,mappedBy = "recipe")//mappedBy indicate the target property in Ingridient classpo
+    private Set<Ingredient> Ingredient;
     public String getDescription() {
         return description;
     }
