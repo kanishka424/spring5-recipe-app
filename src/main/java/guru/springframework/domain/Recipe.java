@@ -24,6 +24,12 @@ public class Recipe {
 
     @OneToMany(cascade= CascadeType.ALL,mappedBy = "recipe")//mappedBy indicate the target property in Ingridient classpo
     private Set<Ingredient> Ingredient;
+
+    @Enumerated(value=EnumType.STRING)
+    private Difficulty difficulty;
+
+
+
     public String getDescription() {
         return description;
     }

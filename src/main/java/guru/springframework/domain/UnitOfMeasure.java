@@ -9,8 +9,8 @@ import javax.persistence.Id;
 public class UnitOfMeasure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//why this?not AUTO?
-    public long id;
-    public String description;
+    private long id;
+    private String description;
 
 
     public long getId() {
