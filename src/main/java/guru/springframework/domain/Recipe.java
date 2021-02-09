@@ -12,9 +12,9 @@ public class Recipe {
     private String description;
     private Integer prepTime;
     private Integer cookTime;
-    private Integer serving;
+    private Integer servings;
     private String url;
-    private String direction;
+    private String directions;
 
 
     @Lob
@@ -23,10 +23,14 @@ public class Recipe {
     private Notes notes;
 
     @OneToMany(cascade= CascadeType.ALL,mappedBy = "recipe")//mappedBy indicate the target property in Ingridient classpo
-    private Set<Ingredient> Ingredient;
+    private Set<Ingredient> ingredients;
 
     @Enumerated(value=EnumType.STRING)
     private Difficulty difficulty;
+
+    @JoinTable(name="recipe_category",
+            joinColumns = @JoinColumn(name="recipe_id"),inverseJoinColumns = @JoinColumn(name="category_id"))//how to join create a join table
+    private Set<Category> categories;
 
 
 
@@ -54,12 +58,12 @@ public class Recipe {
         this.cookTime = cookTime;
     }
 
-    public Integer getServing() {
-        return serving;
+    public Integer getServings() {
+        return servings;
     }
 
-    public void setServing(Integer serving) {
-        this.serving = serving;
+    public void setServings(Integer servings) {
+        this.servings = servings;
     }
 
     public String getUrl() {
@@ -70,12 +74,12 @@ public class Recipe {
         this.url = url;
     }
 
-    public String getDirection() {
-        return direction;
+    public String getDirections() {
+        return directions;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setDirections(String directions) {
+        this.directions = directions;
     }
 
     public Byte[] getImage() {
@@ -92,5 +96,29 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
